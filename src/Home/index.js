@@ -1,10 +1,8 @@
-import { Button } from "react-bootstrap";
+import * as styles from "./style.js"
 
 const Home = () => {
     return (
-        <Button>
-            Klicka
-        </Button>
+     <styles.Banner></styles.Banner>
     );
 }
 
