@@ -23,7 +23,7 @@ module.exports = {
         red: {
           DEFAULT: '#DA4142'
         },
-        'bg': '#F8F8F8'
+        'bg': '#E3E3E3'
       }
     },
   },
