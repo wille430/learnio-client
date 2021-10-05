@@ -2,19 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import reportWebVitals from './reportWebVitals'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Home from 'Home';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import App from 'App'
+import { UserProvider } from 'Context/UserContext'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <Switch>
-        <Route path="/">
-          <Home />
-        </Route>
-      </Switch>
-    </Router>
+    <UserProvider>
+      <App />
+    </UserProvider>
   </React.StrictMode>,
   document.getElementById('root')
 )
