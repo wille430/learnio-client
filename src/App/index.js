@@ -3,6 +3,7 @@ import Hub from 'Hub'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Home from 'Home';
 import { UserContext } from 'Context/UserContext';
+import Login from 'Login';
 
 
 
@@ -13,8 +14,11 @@ const App = () => {
   return (
     <Router>
       <Switch>
+        <Route path="/login">
+          <Login/>
+        </Route>
         <Route path="/">
-          { token ? <Hub /> : <Home/>}
+          {token ? <Hub /> : <Home />}
         </Route>
       </Switch>
     </Router>
