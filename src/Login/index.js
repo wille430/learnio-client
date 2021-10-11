@@ -1,3 +1,5 @@
+
+import User from 'api/User';
 import React, { useState } from 'react';
 
 const Login = () => {
@@ -7,7 +9,7 @@ const Login = () => {
 
     const onFormSubmit = (e) => {
         e.preventDefault()
-        console.log({ username, password })
+        User.login({ username, password })
     }
 
     return (
