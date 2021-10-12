@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Home from 'Home';
 import { UserContext } from 'Context/UserContext';
 import Login from 'Login';
+import PublicRoute from 'components/PublicRoute';
 
 
 
@@ -14,9 +15,7 @@ const App = () => {
   return (
     <Router>
       <Switch>
-        <Route path="/login">
-          <Login/>
-        </Route>
+        <PublicRoute path="/login" component={Login} />
         <Route path="/">
           {token ? <Hub /> : <Home />}
         </Route>
