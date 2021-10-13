@@ -5,6 +5,7 @@ import Home from 'Home';
 import { UserContext } from 'Context/UserContext';
 import Login from 'Login';
 import PublicRoute from 'components/PublicRoute';
+import Register from 'Register';
 
 
 
@@ -16,6 +17,7 @@ const App = () => {
     <Router>
       <Switch>
         <PublicRoute path="/login" component={Login} />
+        <PublicRoute path="/register" component={Register} />
         <Route path="/">
           {token ? <Hub /> : <Home />}
         </Route>

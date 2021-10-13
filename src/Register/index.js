@@ -3,22 +3,25 @@ import FormInput from 'components/FormInput';
 import { UserContext } from 'Context/UserContext';
 import React, { useContext, useState } from 'react';
 
-const Login = () => {
+const Register = () => {
 
-    const { logIn } = useContext(UserContext)
+    const { register } = useContext(UserContext)
 
     const [username, setUsername] = useState()
     const [password, setPassword] = useState()
+    // const [email, setEmail] = useState()
     const [usernameError, setUsernameError] = useState()
     const [passwordError, setPasswordError] = useState()
+    // const [emailError, setEmailError] = useState()
 
     const onFormSubmit = (e) => {
         e.preventDefault()
-        logIn({username, password}).then(res => {
+        register({username, password}).then(res => {
             if (!res) return
             console.log(res)
             setUsernameError(res.find(error => error.param === "username")?.msg)
             setPasswordError(res.find(error => error.param === "password")?.msg)
+            // setEmailError(res.find(error => error.param === "email")?.msg)
         })
     }
 
@@ -34,6 +37,13 @@ const Login = () => {
                             onChange={e => setUsername(e.currentTarget.value)}
                             errorMessage={usernameError}
                         />
+                        {/* <FormInput
+                            value={email}
+                            label="E-mail"
+                            name="email"
+                            onChange={e => setEmail(e.currentTarget.value)}
+                            errorMessage={emailError}
+                        /> */}
                         <FormInput
                             value={password}
                             label="Password"
@@ -42,7 +52,7 @@ const Login = () => {
                             onChange={e => setPassword(e.currentTarget.value)}
                             errorMessage={passwordError}
                         />
-                        <button type="submit">Login</button>
+                        <button type="submit">Register</button>
                     </form>
                 </section>
             </main>
@@ -51,4 +61,4 @@ const Login = () => {
     );
 }
 
-export default Login;
+export default Register;

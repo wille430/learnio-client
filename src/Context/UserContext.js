@@ -11,12 +11,21 @@ export const UserProvider = ({ children }) => {
 
     })
 
-    const logIn = ({username, pwd}) => {
-        // Check database for correct username and password
-        if ((username === "username" && pwd === "password")) return false
-
-        // Authenticate if matching
-        setToken('token123')
+    const logIn = async ({username, password}) => {
+        const response = await fetch('http://api.learnio.ml/user/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        }).then(async res => {
+            if (res.ok) {
+                setToken(await res.text())
+                return null
+            }
+            return await res.json()
+        })
+        return response
     }
 
     const logOut = () => {
@@ -24,12 +33,30 @@ export const UserProvider = ({ children }) => {
         setToken()
     }
 
+    const register = async ({username, password}) => {
+        const response = await fetch('http://api.learnio.ml/user/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        }).then(async res => {
+            if (res.ok) {
+                setToken(await res.text())
+                return null
+            }
+            return await res.json()
+        })
+        return response
+    }
+
     return (
         <UserContext.Provider value={{
             token,
             user,
             logIn,
-            logOut
+            logOut,
+            register
         }}>
             {children}
         </UserContext.Provider>
