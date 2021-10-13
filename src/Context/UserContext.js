@@ -1,3 +1,4 @@
+import UserAPI from 'api/UserAPI';
 import React, { createContext, useState } from 'react';
 import useToken from './useToken';
 
@@ -5,7 +6,7 @@ export const UserContext = createContext()
 
 export const UserProvider = ({ children }) => {
 
-    
+
 
     const { token, setToken } = useToken()
 
@@ -13,23 +14,11 @@ export const UserProvider = ({ children }) => {
 
     })
 
-    const logIn = async ({username, password}) => {
-        const response = await fetch('http://api.learnio.ml/user/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username, password })
-        }).then(async res => {
-            if (res.ok) {
-                const token = await res.text()
-                console.log(token)
-                setToken(token)
-                return null
-            }
-            return await res.json()
+    const logIn = async ({ username, password }) => {
+        return await UserAPI.login({ username, password }).then(res => {
+            if (!res.errors) setToken(res)
+            return res
         })
-        return response
     }
 
     const logOut = () => {
@@ -37,21 +26,11 @@ export const UserProvider = ({ children }) => {
         setToken()
     }
 
-    const register = async ({username, password}) => {
-        const response = await fetch('http://api.learnio.ml/user/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username, password })
-        }).then(async res => {
-            if (res.ok) {
-                setToken(await res.text())
-                return null
-            }
-            return await res.json()
+    const register = async ({ username, password, repassword }) => {
+        return await UserAPI.register({username, password, repassword}).then(res => {
+            if (!res.errors) setToken(res)
+            return res
         })
-        return response
     }
 
     return (

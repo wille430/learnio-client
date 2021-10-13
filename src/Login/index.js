@@ -1,7 +1,9 @@
 import Footer from 'components/Footer';
+import Form from 'components/Form';
 import FormInput from 'components/FormInput';
 import { UserContext } from 'Context/UserContext';
 import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
 
@@ -14,39 +16,38 @@ const Login = () => {
 
     const onFormSubmit = (e) => {
         e.preventDefault()
-        logIn({username, password}).then(res => {
-            if (!res) return
-            console.log(res)
-            setUsernameError(res.find(error => error.param === "username")?.msg)
-            setPasswordError(res.find(error => error.param === "password")?.msg)
+        logIn({ username, password }).then(res => {
+            if (res.errors) {
+                setUsernameError(res.errors.find(error => error.param === "username")?.msg)
+                setPasswordError(res.errors.find(error => error.param === "password")?.msg)
+            }
         })
     }
 
     return (
         <div>
             <main className="h-screen w-full flex justify-center items-center">
-                <section className="bg-purple">
-                    <form className="flex flex-col p-4 pb-8" onSubmit={onFormSubmit}>
-                        <FormInput
-                            value={username}
-                            label="Username"
-                            name="username"
-                            onChange={e => setUsername(e.currentTarget.value)}
-                            errorMessage={usernameError}
-                        />
-                        <FormInput
-                            value={password}
-                            label="Password"
-                            name="password"
-                            type="password"
-                            onChange={e => setPassword(e.currentTarget.value)}
-                            errorMessage={passwordError}
-                        />
-                        <button type="submit">Login</button>
-                    </form>
-                </section>
+                <Form buttonLabel="Login" onFormSubmit={onFormSubmit} bottomComponents={[
+                    <Link className="text-sm" to="/register">Create an account</Link>
+                ]}>
+                    <FormInput
+                        value={username}
+                        label="Username"
+                        name="username"
+                        onChange={e => setUsername(e.currentTarget.value)}
+                        errorMessage={usernameError}
+                    />
+                    <FormInput
+                        value={password}
+                        label="Password"
+                        name="password"
+                        type="password"
+                        onChange={e => setPassword(e.currentTarget.value)}
+                        errorMessage={passwordError}
+                    />
+                </Form>
             </main>
-            <Footer/>
+            <Footer />
         </div>
     );
 }
