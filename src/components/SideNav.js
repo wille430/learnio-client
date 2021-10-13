@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import LogOutButton from './LogOutButton';
 
 const SideNav = () => {
 
@@ -12,6 +13,7 @@ const SideNav = () => {
                 <li>Courses +</li>
                 <Link to="/create-course"><li>Create course</li></Link>
                 <Link to="#"><li>Techniques</li></Link>
+                <LogOutButton />
             </ul>
         </aside>
     );

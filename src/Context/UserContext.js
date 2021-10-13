@@ -5,6 +5,8 @@ export const UserContext = createContext()
 
 export const UserProvider = ({ children }) => {
 
+    
+
     const { token, setToken } = useToken()
 
     const [user, setUser] = useState({
@@ -20,7 +22,9 @@ export const UserProvider = ({ children }) => {
             body: JSON.stringify({ username, password })
         }).then(async res => {
             if (res.ok) {
-                setToken(await res.text())
+                const token = await res.text()
+                console.log(token)
+                setToken(token)
                 return null
             }
             return await res.json()
