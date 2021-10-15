@@ -1,9 +1,17 @@
-import UserAPI from "api/UserAPI"
+// import UserAPI from "api/UserAPI"
 import { useEffect, useState } from "react"
 
 const useToken = () => {
 
-    const [token, setToken] = useState(null)
+const getToken = () => {
+        const userToken = sessionStorage.getItem('token')
+        // const isValidToken = await UserAPI.isValidToken(userToken)
+        // if (!isValidToken) return
+        // setToken(userToken)
+        return userToken
+    }
+
+    const [token, setToken] = useState(getToken())
 
     const saveToken = (userToken) => {
         if (!userToken) {
@@ -16,12 +24,6 @@ const useToken = () => {
         }
     }
 
-    const getToken = async () => {
-        const userToken = sessionStorage.getItem('token')
-        const isValidToken = await UserAPI.isValidToken(userToken)
-        if (!isValidToken) return
-        setToken(userToken)
-    }
 
     useEffect(() => {
         getToken()

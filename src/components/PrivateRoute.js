@@ -1,9 +1,9 @@
 import { UserContext } from 'Context/UserContext';
-import React, { Component } from 'react';
+import React from 'react';
 import { Redirect } from 'react-router';
 import { Route } from 'react-router-dom'
 
-const PrivateRoute = ({ component, ...rest}) => {
+const PrivateRoute = ({ component: Component, ...rest}) => {
     const { token } = React.useContext(UserContext)
     return (
         <Route {...rest} render={props => (

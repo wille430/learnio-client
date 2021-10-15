@@ -1,11 +1,16 @@
 import React, { useContext } from 'react';
-import Hub from 'Hub'
+// import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Home from 'Home';
 import { UserContext } from 'Context/UserContext';
-import Login from 'Login';
 import PublicRoute from 'components/PublicRoute';
-import Register from 'Register';
+import PrivateRoute from 'components/PrivateRoute';
+
+// Routes
+import Hub from 'routes/Hub'
+import Home from 'routes/Home';
+import Login from 'routes/Login';
+import Register from 'routes/Register';
+import CreateProject from 'routes/CreateProject';
 
 
 
@@ -18,9 +23,10 @@ const App = () => {
       <Switch>
         <PublicRoute path="/login" component={Login} />
         <PublicRoute path="/register" component={Register} />
-        <Route path="/">
-          {token ? <Hub /> : <Home />}
-        </Route>
+        <PrivateRoute path="/create-project" component={CreateProject} />
+        <Route path="/" component={
+          token ? Hub : Home
+        } />
       </Switch>
     </Router>
   );

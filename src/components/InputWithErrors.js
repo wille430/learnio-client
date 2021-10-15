@@ -1,4 +1,4 @@
-const InputWithErrors = ({ errorMessage, ...rest }) => {
+const InputWithErrors = ({ errorMessage, textStyle, ...rest }) => {
     return (
         <div>
             <input
@@ -7,7 +7,7 @@ const InputWithErrors = ({ errorMessage, ...rest }) => {
             />
             <br />
             {
-                errorMessage && <span className="text-red-500">{errorMessage}</span>
+                errorMessage && <span className={textStyle || 'text-red-400'}>{errorMessage}</span>
             }
         </div>
 
