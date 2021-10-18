@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import LogOutButton from './LogOutButton';
 
 const SideNav = () => {
 
@@ -10,8 +11,9 @@ const SideNav = () => {
             <h3>Navbar</h3>
             <ul className="flex flex-col space-y-2 pl-4">
                 <li>Courses +</li>
-                <Link to="/create-course"><li>Create course</li></Link>
+                <Link to="/create-project"><li>Create course</li></Link>
                 <Link to="#"><li>Techniques</li></Link>
+                <LogOutButton />
             </ul>
         </aside>
     );
