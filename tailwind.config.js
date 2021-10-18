@@ -3,6 +3,12 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      width:{
+        '1/16': '6.25%',
+        '2/16': '12.5%',
+        '3/16': '18.75%',
+        '7/16': '43.75%',
+      },
       colors: {
         purple: {
           light: '#B09DF4',
