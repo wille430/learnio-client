@@ -7,7 +7,7 @@ const PrivateRoute = ({ component: Component, ...rest}) => {
     const { token } = React.useContext(UserContext)
     return (
         <Route {...rest} render={props => (
-            token ? <Component {...props}/> : <Redirect to="/login"/>
+            token ? <Component {...props}/> : <Redirect to="/"/>
         )}/>
     )
 }

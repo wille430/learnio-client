@@ -4,24 +4,50 @@ import Container from "components/Container";
 import FormInput from 'components/FormInput';
 import UserAPI from 'api/UserAPI';
 import useToken from 'Context/useToken';
+import TechniqueList from './TechniqueList';
+
+const initTechniques = [
+    {
+        name: 'Intervalled training',
+        value: 'intervalled_training',
+        color: 'pink',
+        selected: false
+    },
+    {
+        name: 'Spaced Repetition',
+        value: 'spaced_repetition',
+        color: 'lightblue',
+        selected: false
+    },
+    {
+        name: 'Feynman technique',
+        value: 'feynman_technique',
+        color: 'orange',
+        selected: false
+    },
+]
 
 const CreateProject = () => {
 
-    const [name, setName] = useState({
-        msg: '',
-        color: 'text-red-400'
-    })
+    const [name, setName] = useState()
     const [nameError, setNameError] = useState()
+
+    const [techniques, setTechniques] = useState(initTechniques)
+    const [techniquesError, setTechniquesError] = useState()
+
     const { token } = useToken()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         setNameError(null)
         UserAPI.createProject(token, {
-            projectName: name
+            projectName: name,
+            selectedTechniques: techniques.filter(x => x.selected === true).map(x => x.value)
+
         }).then(res => {
-            if (res.errors) {
+            if (res?.errors) {
                 setNameError(res.errors.find(x => x.param === "name")?.msg)
+                setTechniquesError(res.errors.find(x => x.param === "techniques")?.msg)
             }
         })
     }
@@ -42,6 +68,8 @@ const CreateProject = () => {
                             style={{ maxWidth: "250px" }}
                             errorMessage={nameError}
                         />
+                        <TechniqueList techniques={techniques} setTechniques={setTechniques} />
+                        <span id="techniquesErrorText">{techniquesError}</span>
                         <button className="p-2 bg-green-500 text-white rounded" type="submit">Add project</button>
                     </form>
                 </Container>

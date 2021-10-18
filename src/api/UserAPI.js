@@ -50,16 +50,16 @@ const UserAPI = {
             return false
         }
     },
-    createProject: async (token, { projectName }) => {
+    createProject: async (token, { projectName, selectedTechniques }) => {
         return await fetch(process.env.REACT_APP_API_URL + 'user/projects', {
             method: 'POST',
             headers: new Headers({
-                'Authorization': 'Bearer' + token,
+                'Authorization': 'Bearer ' + token,
                 'Content-Type': 'application/json'
             }),
             body: JSON.stringify({
                 title: projectName,
-                selectedTechniques: []
+                selectedTechniques: selectedTechniques
             })
         }).then(async res => {
             if (res.ok) {
