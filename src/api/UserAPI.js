@@ -74,6 +74,27 @@ const UserAPI = {
                 }
             }
         }).catch(e => console.log(e))
+    },
+    getProjects: async (token) => {
+        return await fetch(process.env.REACT_APP_API_URL + 'user/projects', {
+            method: 'GET',
+            headers: new Headers({
+                'Authorization': 'Bearer ' + token,
+                'Content-Type': 'application/json'
+            })
+        }).then(async res => {
+            if (res.ok) {
+                return await res.json()
+            } else {
+                let errors = []
+                try {
+                    errors = await res.json()
+                } catch (e) { console.log(e) }
+                return {
+                    errors
+                }
+            }
+        }).catch(e => console.log(e))
     }
 }
 

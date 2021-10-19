@@ -5,27 +5,7 @@ import FormInput from 'components/FormInput';
 import UserAPI from 'api/UserAPI';
 import useToken from 'Context/useToken';
 import TechniqueList from './TechniqueList';
-
-const initTechniques = [
-    {
-        name: 'Intervalled training',
-        value: 'intervalled_training',
-        color: 'pink',
-        selected: false
-    },
-    {
-        name: 'Spaced Repetition',
-        value: 'spaced_repetition',
-        color: 'lightblue',
-        selected: false
-    },
-    {
-        name: 'Feynman technique',
-        value: 'feynman_technique',
-        color: 'orange',
-        selected: false
-    },
-]
+import initTechniques from 'data/techniques';
 
 const CreateProject = () => {
 

@@ -1,12 +1,10 @@
 import React from 'react';
 import TableButton from "components/TableButton"
 
-const Table = ({ headers, rows }) => {
+const Table = ({ headers, children }) => {
     return (
         <div classname="w-full ">
-            <table className="mx-auto border-solid border-2 border-gray-400 bg-gray-100 table-fixed" style={{
-                width: '90%',
-            }}>
+            <table className="mx-auto border-solid border-2 border-gray-400 bg-gray-100 table-fixed w-full">
                 <tr className="border-solid border-2 border-gray-400 text-sm m-1">
                     {/* <th className="w-1/16">Curcle</th>
                     <th className="w-3/16">Course Name</th>
@@ -20,13 +18,7 @@ const Table = ({ headers, rows }) => {
                         })
                     }
                 </tr>
-                <tr>
-                    {
-                        headers.map(header => {
-                            return <th className="text-xs mx-1">{header}</th>
-                        })
-                    }
-                </tr>
+                {children}
                 <tr>
                     <td colSpan="5" className="text-center py-2">
                         <TableButton />
