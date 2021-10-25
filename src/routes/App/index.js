@@ -12,6 +12,7 @@ import Login from 'routes/Login';
 import Register from 'routes/Register';
 import CreateProject from 'routes/CreateProject';
 import Techniques from 'routes/Techniques';
+import Project from 'routes/Project'
 
 
 
@@ -26,6 +27,7 @@ const App = () => {
         <PublicRoute path="/register" component={Register} />
         <PrivateRoute path="/create-project" component={CreateProject} />
         <PrivateRoute path="/techniques" component={Techniques} />
+        <PrivateRoute path="/project" component={Project} />
         <Route path="/" component={
           token ? Hub : Home
         } />

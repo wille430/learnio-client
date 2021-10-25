@@ -11,7 +11,8 @@ const MyCourses = () => {
     const [rows, setRows] = useState([])
 
     useEffect(() => {
-        getRows()
+        getRows() 
+        // eslint-disable-next-line 
     }, [])
 
     const getRows = async () => {

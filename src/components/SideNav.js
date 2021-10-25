@@ -12,7 +12,7 @@ const SideNav = () => {
             <ul className="flex flex-col space-y-2 pl-4">
                 <li>Courses +</li>
                 <Link to="/create-project"><li>Create course</li></Link>
-                <Link to="#"><li>Techniques</li></Link>
+                <Link to="/techniques"><li>Techniques</li></Link>
                 <LogOutButton />
             </ul>
         </aside>
