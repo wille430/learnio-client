@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import SideNav from "components/SideNav";
 import Container from "components/Container";
 import FormInput from 'components/FormInput';
-import UserAPI from 'api/UserAPI';
+import ProjectAPI from 'api/ProjectAPI';
 import useToken from 'Context/useToken';
 import TechniqueList from './TechniqueList';
 import initTechniques from 'data/techniques';
@@ -20,7 +20,7 @@ const CreateProject = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         setNameError(null)
-        UserAPI.createProject(token, {
+        ProjectAPI.create(token, {
             projectName: name,
             selectedTechniques: techniques.filter(x => x.selected === true).map(x => x.value)
 
