@@ -12,7 +12,8 @@ import Login from 'routes/Login';
 import Register from 'routes/Register';
 import CreateProject from 'routes/CreateProject';
 import Techniques from 'routes/Techniques';
-import Project from 'routes/Project'
+import Project from 'routes/Project';
+import AddFlashcard from 'routes/AddFlashcard'
 
 
 
@@ -28,6 +29,7 @@ const App = () => {
         <PrivateRoute path="/create-project" component={CreateProject} />
         <PrivateRoute path="/techniques" component={Techniques} />
         <PrivateRoute path="/project" component={Project} />
+        <PrivateRoute path="/flashcard" component={AddFlashcard} />
         <Route path="/" component={
           token ? Hub : Home
         } />
