@@ -5,7 +5,7 @@ import LogOutButton from './LogOutButton';
 const SideNav = () => {
 
     return (
-        <aside className="h-screen sticky bg-purple shadow-sm p-5 text-white space-y-1 pt-8" style={{
+        <aside className="h-screen sticky bg-purple shadow-sm p-5 text-white space-y-1 pt-8 top-0" style={{
             width: '215px'
         }}>
             <h3>Navbar</h3>
