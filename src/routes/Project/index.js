@@ -11,9 +11,11 @@ const Project = () => {
     const { project_id } = useParams()
     const token = useContext(UserContext).token
     const [project, setProject] = useState()
+    
     useEffect(() => {
         const getProject = async () => {
             const project = await ProjectAPI.getOne(token, project_id)
+            console.log(project)
             setProject(project)
         }
         getProject()
