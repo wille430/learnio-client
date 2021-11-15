@@ -1,9 +1,25 @@
 import SideNav from 'components/SideNav';
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Footer from "components/Footer"
 import TechniqueContainer from 'components/TechniqueContainer';
+import { useParams } from 'react-router-dom';
+import ProjectAPI from 'api/ProjectAPI';
+import { UserContext } from 'Context/UserContext';
+
 
 const Project = () => {
+    const { project_id } = useParams()
+    const token = useContext(UserContext).token
+    const [project, setProject] = useState()
+    useEffect(() => {
+        const getProject = async () => {
+            const project = await ProjectAPI.getOne(token, project_id)
+            setProject(project)
+        }
+        getProject()
+
+    }, [])
+
     return (
         <div>
             <main className="w-full min-h-screen bg-bg flex">
@@ -18,9 +34,8 @@ const Project = () => {
                     }}>
                         <h2 className="text-left mt-4 ml-4 text-purple-dark text-3xl">Active Techniques</h2>
                         <div className="flex flex-col">
-                            <TechniqueContainer />
-                            <TechniqueContainer />
-                            <TechniqueContainer />
+                            {project && project.techniques.spaced_repetition.map(technique =>(<TechniqueContainer/>))}
+                            
                         </div>
                     </div>
                 </div>

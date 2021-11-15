@@ -28,7 +28,7 @@ const App = () => {
         <PublicRoute path="/register" component={Register} />
         <PrivateRoute path="/create-project" component={CreateProject} />
         <PrivateRoute path="/techniques" component={Techniques} />
-        <PrivateRoute exact path="/project" component={Project} />
+        <PrivateRoute exact path="/project/:project_id" component={Project} />
         <PrivateRoute path="/project/:project_id/:technique_id/flashcards/create" component={AddFlashcard} />
 
         <Route path="/" component={

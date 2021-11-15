@@ -45,6 +45,27 @@ const ProjectAPI = {
             }
         }).catch(e => console.log(e))
     },
+    getOne: async (token, project_id) => {
+        return await fetch(process.env.REACT_APP_API_URL + 'user/projects/' + project_id , {
+            method: 'GET',
+            headers: new Headers({
+                'Authorization': 'Bearer ' + token,
+                'Content-Type': 'application/json'
+            })
+        }).then(async res => {
+            if (res.ok) {
+                return await res.json()
+            } else {
+                let errors = []
+                try {
+                    errors = await res.json()
+                } catch (e) { console.log(e) }
+                return {
+                    errors
+                }
+            }
+        }).catch(e => console.log(e))
+    },
     delete: async (token, {project_id}) => {
         const response = await fetch(process.env.REACT_APP_API_URL,{
             method: 'DELETE',
