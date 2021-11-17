@@ -6,9 +6,7 @@ const TechniqueList = ({techniques, setTechniques}) => {
         <section className="grid gap-4" style={{
             gridTemplateColumns: 'repeat(auto-fill,  minmax(150px, 1fr))'
         }}>
-            <TechniqueCard techniques={techniques} setTechniques={setTechniques} index={0} key={techniques[0].value} />
-            <TechniqueCard techniques={techniques} setTechniques={setTechniques} index={1} key={techniques[1].value} />
-            <TechniqueCard techniques={techniques} setTechniques={setTechniques} index={2} key={techniques[2].value} />
+            {techniques.map((x, i) => <TechniqueCard techniques={techniques} setTechniques={setTechniques} index={i} key={techniques[i].value} />)}
         </section>
     );
 }

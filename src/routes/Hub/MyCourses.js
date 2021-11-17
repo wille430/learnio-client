@@ -1,4 +1,3 @@
-import UserAPI from 'api/UserAPI';
 import Container from 'components/Container';
 import Table from 'components/Table';
 import { UserContext } from 'Context/UserContext';
@@ -19,7 +18,7 @@ const MyCourses = () => {
 
     const getRows = async () => {
         const projects = await ProjectAPI.getAll(token)
-        console.log(projects)
+        
         setRows(projects.map(project => {
             return (
                 <tr>

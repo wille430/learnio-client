@@ -1,7 +1,7 @@
 import React from 'react';
-const ArrowButton = () => {
+const ArrowButton = ({ ...props }) => {
     return (
-        <button className="text-lg mx-auto text-gray-600 ">
+        <button className="text-lg mx-auto text-gray-600" {...props}>
             <span>➤</span>
         </button>
     );
