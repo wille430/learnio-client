@@ -15,7 +15,14 @@ const CreateProject = () => {
     const [name, setName] = useState()
     const [nameError, setNameError] = useState()
 
-    const [techniques, setTechniques] = useState(initTechniques)
+    const techniqueState = initTechniques.map(x => ({
+        name: x.name,
+        value: x.value,
+        selected: false
+    }))
+
+
+    const [techniques, setTechniques] = useState(techniqueState)
     const [techniquesError, setTechniquesError] = useState()
     const [showSnackbar, setShowSnackbar] = useState(false)
 
@@ -26,11 +33,11 @@ const CreateProject = () => {
         setNameError(null)
         await ProjectAPI.create(token, {
             projectName: name,
-            selectedTechniques: techniques.filter(x => x.selected === true).map(x => x.value)
+            selectedTechniques: techniques.filter(technique => technique.selected === true).map(x => x.value)
         }).then(res => {
             if (res?.errors) {
-                setNameError(res.errors.find(x => x.param === "name")?.msg)
-                setTechniquesError(res.errors.find(x => x.param === "techniques")?.msg)
+                setNameError(res.errors.find(x => x.param === "title")?.msg)
+                setTechniquesError(res.errors.find(x => x.param === "selectedTechniques")?.msg)
             } else {
                 setShowSnackbar(true)
             }
@@ -54,8 +61,7 @@ const CreateProject = () => {
                                 style={{ maxWidth: "250px" }}
                                 errorMessage={nameError}
                             />
-                            <TechniqueList techniques={techniques} setTechniques={setTechniques} />
-                            <span id="techniquesErrorText">{techniquesError}</span>
+                            <TechniqueList state={[techniques, setTechniques]} errorMessage={techniquesError} />
                             <AsyncButton className="p-2 bg-green-500 text-white rounded" type="submit" onClick={handleSubmit}>Add project</AsyncButton>
                         </form>
                     </Container>

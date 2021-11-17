@@ -4,19 +4,19 @@ import Banner from "./Banner";
 import investment from "assets/investment-home.svg";
 import notebook from "assets/notebook-home.svg";
 import calendar from "assets/calendar-home.svg";
-import Table from "components/Table";
 
 const Home = () => {
     return (
         <div className="layout">
-            <main className="main min-h-screen">
+            <main className="main" style={{
+                padding: '0px'
+            }}>
                 <NavBar />
                 <Banner />
                 <div className="flex justify-center">
                     <div className="w-4/5 space-y-5">
                         <Container>
                             <div className="h-14"></div>
-                            <Table headers={["Curcle", "Matte", "inför prov", "Spaced repetition", "2021-10-21"]} />
                         </Container>
                         <Container>
                             <div className="flex justify-center ">

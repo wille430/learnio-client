@@ -31,8 +31,8 @@ const App = () => {
         <PrivateRoute path="/create-project" component={CreateProject} />
         <PrivateRoute path="/techniques" component={Techniques} />
         <PrivateRoute exact path="/project/:project_id" component={Project} />
-        <PrivateRoute path="/project/:project_id/flashcards" component={Flashcards} />
         <PrivateRoute path="/project/:project_id/flashcards/create" component={AddFlashcard} />
+        <PrivateRoute path="/project/:project_id/flashcards" component={Flashcards} />
         <Route path="/" component={
           token ? Hub : Home
         } />

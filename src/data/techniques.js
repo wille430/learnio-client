@@ -9,7 +9,8 @@ const techniques = [
             "Leitner system"
         ],
         color: "pink",
-        selected: false
+        selected: false,
+        description: "Maximize retention of facts with help of flashcards"
     }
 ]
 
