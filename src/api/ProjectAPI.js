@@ -115,6 +115,32 @@ const ProjectAPI = {
         } else {
             return []
         }
+    },
+    completeFlashcard: async (token, { project_id, flashcard_id }) => {
+        try {
+            await fetch(process.env.REACT_APP_API_URL + `user/projects/${project_id}/flashcards/${flashcard_id}/complete`, {
+                method: 'POST',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + token,
+                    'Content-Type': 'application/json'
+                })
+            })
+        } catch (e) {
+            throw new Error(e.message)
+        }
+    },
+    getNext: async (token, { project_id }) => {
+        try {
+            return await fetch(process.env.REACT_APP_API_URL + `user/projects/${project_id}/flashcards/next`, {
+                method: 'GET',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + token,
+                    'Content-Type': 'application/json'
+                })
+            }).then((res) => res.json())
+        } catch (e) {
+            throw new Error(e.message)
+        }
     }
 }
 export default ProjectAPI
