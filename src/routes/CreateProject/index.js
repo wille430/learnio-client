@@ -7,8 +7,10 @@ import useToken from 'Context/useToken';
 import TechniqueList from './TechniqueList';
 import initTechniques from 'data/techniques';
 import AsyncButton from 'components/AsyncButton';
-import Alert from '@mui/material/Alert'
-import Snackbar from '@mui/material/Snackbar'
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const CreateProject = () => {
 
@@ -44,6 +46,8 @@ const CreateProject = () => {
         })
     }
 
+    const [startdate, setStartDate] = useState(new Date());
+       
     return (
         <div className="layout">
             <SideNav />
@@ -63,6 +67,7 @@ const CreateProject = () => {
                             />
                             <TechniqueList state={[techniques, setTechniques]} errorMessage={techniquesError} />
                             <AsyncButton className="p-2 bg-green-500 text-white rounded" type="submit" onClick={handleSubmit}>Add project</AsyncButton>
+                            <DatePicker selected={startdate} onChange={(date) => setStartDate(date)} />
                         </form>
                     </Container>
                 </section>
