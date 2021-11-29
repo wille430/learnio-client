@@ -17,19 +17,35 @@ const Flashcard = () => {
     const { project_id } = useParams()
     const { token } = useContext(UserContext)
 
-    // Get next flashcard
-    useEffect(() => {
+    const completeFlashcard = async (difficulty) => {
+        await ProjectAPI.completeFlashcard(token, { project_id, flashcard_id: flashcard._id, difficulty })
         setLoading(true)
+        getNextFlashcard()
+    }
+
+    const getNextFlashcard = () => {
         ProjectAPI.getNext(token, { project_id }).then((nextFlashcard) => {
             setFlashcard(nextFlashcard)
             setLoading(false)
         })
+    }
+
+    // Get next flashcard
+    useEffect(() => {
+        setLoading(true)
+        getNextFlashcard()
         // eslint-disable-next-line
     }, [])
 
     return (
         <Container className="bg-white h-72 max-h-full max-w-2xl mx-auto">
-            {!loading && (!show ? <Front q={flashcard?.question} setShow={setShow} /> : <Back a={flashcard?.answer} flashcard_id={flashcard._id} />)}
+            {
+                (!loading && flashcard === null) ? (<div className="h-full w-full flex justify-center items-center">Your flashcard queue is empty!</div>) : !loading && (!show ? (
+                    <Front q={flashcard?.question} setShow={setShow} />
+                ) : (
+                    <Back completeFlashcard={completeFlashcard} a={flashcard?.answer} flashcard_id={flashcard._id} />
+                ))
+            }
         </Container>
     )
 }
@@ -37,6 +53,7 @@ const Flashcard = () => {
 const Front = ({ q, setShow }) => {
 
     const { project_id } = useParams()
+
 
     return (
         <div className="flex flex-col h-full">
@@ -51,35 +68,30 @@ const Front = ({ q, setShow }) => {
     )
 }
 
-const Back = ({ a, flashcard_id }) => {
+const Back = ({ a, completeFlashcard }) => {
 
     const { project_id } = useParams()
-    const { token } = useContext(UserContext)
-
-    const completeFlashcard = async () => {
-        await ProjectAPI.completeFlashcard(token, { project_id, flashcard_id })
-    }
 
     const buttons = [
         {
             icon: <VscSmiley />,
             label: 'Forgotten',
-            onClick: () => completeFlashcard()
+            onClick: () => completeFlashcard(3)
         },
         {
             icon: <VscSmiley />,
             label: 'Hard',
-            onClick: () => completeFlashcard()
+            onClick: () => completeFlashcard(2)
         },
         {
             icon: <VscSmiley />,
             label: 'Easy',
-            onClick: () => completeFlashcard()
+            onClick: () => completeFlashcard(1)
         },
         {
             icon: <VscSmiley />,
             label: 'Immediately',
-            onClick: () => completeFlashcard()
+            onClick: () => completeFlashcard(0)
         },
     ]
 

@@ -116,13 +116,16 @@ const ProjectAPI = {
             return []
         }
     },
-    completeFlashcard: async (token, { project_id, flashcard_id }) => {
+    completeFlashcard: async (token, { project_id, flashcard_id, difficulty }) => {
         try {
             await fetch(process.env.REACT_APP_API_URL + `user/projects/${project_id}/flashcards/${flashcard_id}/complete`, {
                 method: 'POST',
                 headers: new Headers({
                     'Authorization': 'Bearer ' + token,
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                }),
+                body: JSON.stringify({
+                    difficulty: difficulty
                 })
             })
         } catch (e) {
