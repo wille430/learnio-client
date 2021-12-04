@@ -28,7 +28,7 @@ const FlashcardTable = () => {
             setRows(flashcards.map(x => ({
                 id: x._id,
                 question: x.question,
-                lastWrong: x.lastWrong,
+                lastWrong: new Date(x.lastWrong).toDateString(),
                 stage: x.stage
             })))
         }
