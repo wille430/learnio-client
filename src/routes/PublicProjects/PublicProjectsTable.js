@@ -2,7 +2,7 @@ import Container from 'components/Container';
 import { UserContext } from 'Context/UserContext';
 import { useContext, useState, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid'
-import { Button } from '@mui/material';
+import { Button, Snackbar } from '@mui/material';
 import PublicProjectAPI from 'api/PublicProjectAPI';
 import { FiPlus } from 'react-icons/fi';
 
@@ -10,6 +10,7 @@ const PublicProjectsTable = () => {
 
     const { token } = useContext(UserContext)
     const [rows, setRows] = useState([])
+    const [error, setError] = useState("")
 
     const columns = [
         { field: 'projectTitle', headerName: 'Project Title', width: 400 },
@@ -22,7 +23,10 @@ const PublicProjectsTable = () => {
             renderCell: (params) => {
 
                 const handleClick = async () => {
-                    await PublicProjectAPI.copyPublicProject(token, { public_project_id: params.row.id })
+                    const res = await PublicProjectAPI.copyPublicProject(token, { public_project_id: params.row.id })
+                    if (res?.errors) {
+                        setError(res.errors.find(x => x.param === 'all').msg)
+                    }
                 }
 
                 return (
@@ -74,6 +78,11 @@ const PublicProjectsTable = () => {
                     />
                 </div>
             </Container>
+            <Snackbar
+                open={error !== ""}
+                onClose={() => setError("")}
+                message={error}
+            />
         </section >
     );
 }

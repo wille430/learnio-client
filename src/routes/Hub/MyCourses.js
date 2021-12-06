@@ -9,12 +9,15 @@ import Button from '@mui/material/Button';
 import { TiTrash, TiPlus, TiWorld } from "react-icons/ti"
 import { useHistory } from 'react-router';
 import PublicProjectAPI from 'api/PublicProjectAPI';
+import { Snackbar } from '@mui/material';
 
 const MyCourses = () => {
 
     const { token } = useContext(UserContext)
     const [rows, setRows] = useState([])
     const [selectedProjects, setSelectedProjects] = useState([])
+
+    const [error, setError] = useState("")
 
     const history = useHistory()
 
@@ -81,7 +84,10 @@ const MyCourses = () => {
 
     const handleMakePublic = async () => {
         selectedProjects.forEach(async selectedProject => {
-            await PublicProjectAPI.makeProjectPublic(token, { project_id: selectedProject })
+            const res = await PublicProjectAPI.makeProjectPublic(token, { project_id: selectedProject })
+            if (res?.errors) {
+                setError(res.errors.find(x => x.param === 'all').msg)
+            }
         })
     }
 
@@ -117,6 +123,11 @@ const MyCourses = () => {
                     {<Button onClick={handleMakePublic} variant="contained" color="primary" startIcon={<TiWorld />} disabled={selectedProjects.length === 0}>Make public</Button>}
                 </div>
             </Container>
+            <Snackbar
+                open={error !== ""}
+                onClose={() => setError("")}
+                message={error}
+            />
         </section>
     );
 }
