@@ -43,7 +43,6 @@ const PublicProjectsTable = () => {
         const projects = await PublicProjectAPI.getAll(token)
 
         setRows(projects.map(project => {
-            if (project === null) return
             return ({
                 id: project._id,
                 projectTitle: project.title,
