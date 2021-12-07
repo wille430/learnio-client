@@ -14,6 +14,9 @@ import CreateProject from 'routes/CreateProject';
 import Techniques from 'routes/Techniques';
 import Project from 'routes/Project';
 import AddFlashcard from 'routes/AddFlashcard'
+import Footer from 'components/Footer';
+import Flashcards from 'routes/Flashcards';
+import Queue from 'routes/Queue';
 
 
 
@@ -29,12 +32,14 @@ const App = () => {
         <PrivateRoute path="/create-project" component={CreateProject} />
         <PrivateRoute path="/techniques" component={Techniques} />
         <PrivateRoute exact path="/project/:project_id" component={Project} />
-        <PrivateRoute path="/project/:project_id/:technique_id/flashcards/create" component={AddFlashcard} />
-
+        <PrivateRoute path="/project/:project_id/flashcards/queue" component={Queue} />
+        <PrivateRoute path="/project/:project_id/flashcards/create" component={AddFlashcard} />
+        <PrivateRoute path="/project/:project_id/flashcards" component={Flashcards} />
         <Route path="/" component={
           token ? Hub : Home
         } />
       </Switch>
+      <Footer />
     </Router>
   );
 }

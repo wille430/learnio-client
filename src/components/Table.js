@@ -13,7 +13,8 @@ const Table = ({ headers, children }) => {
                     <th className="w-2/16">Deadline</th>
                     <th className="w-1/16">...</th> */}
                     {
-                        headers.map(header => {
+                        headers.map((header, i) => {
+                            if (i === 0 || i === headers.length - 1) return <th className="text-xs mx-1 text-left w-1/16">{header}</th>
                             return <th className="text-xs mx-1 text-left">{header}</th>
                         })
                     }

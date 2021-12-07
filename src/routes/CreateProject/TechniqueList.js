@@ -1,15 +1,40 @@
+import { Checkbox, FormControl, FormControlLabel, FormGroup, FormHelperText, FormLabel } from '@mui/material';
+import { Box } from '@mui/system';
 import React from 'react';
-import TechniqueCard from './TechniqueCard';
 
-const TechniqueList = ({techniques, setTechniques}) => {
+const TechniqueList = ({ state, errorMessage }) => {
+
+    const [techniques, setTechniques] = state
+
+    const handleClick = (e) => {
+        setTechniques(prevState => ([
+            ...prevState.filter(x => x.value !== e.target.name),
+            {
+                ...prevState.find(x => x.value === e.target.name),
+                selected: e.target.checked
+            }
+        ]))
+
+    }
+
     return (
-        <section className="grid gap-4" style={{
-            gridTemplateColumns: 'repeat(auto-fill,  minmax(150px, 1fr))'
-        }}>
-            <TechniqueCard techniques={techniques} setTechniques={setTechniques} index={0} key={techniques[0].value} />
-            <TechniqueCard techniques={techniques} setTechniques={setTechniques} index={1} key={techniques[1].value} />
-            <TechniqueCard techniques={techniques} setTechniques={setTechniques} index={2} key={techniques[2].value} />
-        </section>
+        <Box>
+            <FormControl
+                error={errorMessage}
+            >
+                <FormLabel>Choose study techniques</FormLabel>
+                <FormGroup>
+                    {techniques.map((x) => (
+                        <FormControlLabel control={
+                            <Checkbox checked={x.selected} name={x.value} onChange={handleClick} />
+                        }
+                            label={x.name}
+                        />
+                    ))}
+                </FormGroup>
+                <FormHelperText>{errorMessage}</FormHelperText>
+            </FormControl>
+        </Box>
     );
 }
 

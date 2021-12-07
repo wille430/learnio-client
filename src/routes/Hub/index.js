@@ -4,10 +4,12 @@ import MyCourses from './MyCourses';
 
 const Hub = () => {
     return (
-        <main className="w-full min-h-screen bg-bg flex">
+        <div className="layout">
             <SideNav />
-            <MyCourses/>
-        </main>
+            <main className="main">
+                <MyCourses />
+            </main>
+        </div>
     );
 }
 

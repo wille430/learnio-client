@@ -1,4 +1,3 @@
-import Footer from 'components/Footer';
 import Form from 'components/Form';
 import FormInput from 'components/FormInput';
 import { UserContext } from 'Context/UserContext';
@@ -25,8 +24,8 @@ const Login = () => {
     }
 
     return (
-        <div>
-            <main className="h-screen w-full flex justify-center items-center">
+        <div className="layout">
+            <main className="main flex justify-center items-center">
                 <Form buttonLabel="Login" onFormSubmit={onFormSubmit} bottomComponents={[
                     <Link className="text-sm" to="/register">Create an account</Link>
                 ]}>
@@ -47,7 +46,6 @@ const Login = () => {
                     />
                 </Form>
             </main>
-            <Footer />
         </div>
     );
 }
