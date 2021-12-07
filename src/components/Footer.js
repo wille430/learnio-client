@@ -1,5 +1,6 @@
 import React from 'react';
-
+import ButtonMailto from './ButtonMailto';
+import { Link } from 'react-router-dom';
 const Footer = () => {
     return (
         <div className="h bg-purple flex-col p-8" style={{
@@ -21,7 +22,8 @@ const Footer = () => {
                 <div>
                     <h2 className="text-white">Contact Us</h2>
                     <p className="text-white text-xs m-1">Twitter</p>
-                    <p className="text-white text-xs m-1">learnio@gmail.com</p>
+                    <ButtonMailto label="william.wigemo@elev.ga.ntig.se" mailto="william.wigemo@elev.ga.ntig.se" />
+                    <ButtonMailto label="erik.greenblomroos@elev.ga.ntig.se" mailto="william.wigemo@elev.ga.ntig.se" />
                 </div>
             </div>
             <div className="flex justify-center">

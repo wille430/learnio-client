@@ -10,7 +10,7 @@ const Techniques = () => {
             <main className="main">
                 <div className="w-full h-auto flex flex-col justify-center items-center mb-10">
                     <div className="flex items-center h-16">
-                        <h1 className="mx-auto text-purple-dark text-4xl">Techniques</h1>
+                        <h1 className="mx-auto text-purple text-4xl">Techniques</h1>
                     </div>
                     <div className="bg-white m-auto" style={{
                         width: '95%',
