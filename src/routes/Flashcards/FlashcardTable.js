@@ -16,7 +16,7 @@ const FlashcardTable = () => {
 
     const columns = [
         { field: 'question', headerName: 'Question', width: 300 },
-        { field: 'lastWrong', headerName: 'Last Wrong', width: 130 },
+        { field: 'nextAnswer', headerName: 'Due', width: 250 },
         { field: 'answer', headerName: 'Answer', width: 200 },
         { field: 'stage', headerName: 'Stage' }
     ]
@@ -28,7 +28,7 @@ const FlashcardTable = () => {
             setRows(flashcards.map(x => ({
                 id: x._id,
                 question: x.question,
-                lastWrong: x.lastWrong,
+                nextAnswer: new Date(x.nextAnswer).toDateString(),
                 stage: x.stage
             })))
         }

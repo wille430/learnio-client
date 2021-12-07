@@ -6,8 +6,10 @@ import ProjectAPI from 'api/ProjectAPI';
 import { Link } from 'react-router-dom';
 import { DataGrid } from '@mui/x-data-grid'
 import Button from '@mui/material/Button';
-import { TiTrash, TiPlus } from "react-icons/ti"
+import { TiTrash, TiPlus, TiWorld } from "react-icons/ti"
 import { useHistory } from 'react-router';
+import PublicProjectAPI from 'api/PublicProjectAPI';
+import { Snackbar } from '@mui/material';
 
 const MyCourses = () => {
 
@@ -15,16 +17,20 @@ const MyCourses = () => {
     const [rows, setRows] = useState([])
     const [selectedProjects, setSelectedProjects] = useState([])
 
+    const [error, setError] = useState("")
+
     const history = useHistory()
 
     const columns = [
-        { field: 'projectTitle', headerName: 'Project Title', width: 200, renderCell: (params) => {
-            return(
-                <Link to={"/project/" + params.id}>
-                    {params.value}
-                </Link>
-            )
-        } },
+        {
+            field: 'projectTitle', headerName: 'Project Title', width: 200, renderCell: (params) => {
+                return (
+                    <Link to={"/project/" + params.id}>
+                        {params.value}
+                    </Link>
+                )
+            }
+        },
         { field: 'techniques', headerName: 'Techniques', width: 130 },
         { field: 'deadline', headerName: 'End Date', width: 150 },
         { field: 'flashcards', headerName: 'Flashcards' }
@@ -76,6 +82,15 @@ const MyCourses = () => {
         }
     }
 
+    const handleMakePublic = async () => {
+        selectedProjects.forEach(async selectedProject => {
+            const res = await PublicProjectAPI.makeProjectPublic(token, { project_id: selectedProject })
+            if (res?.errors) {
+                setError(res.errors.find(x => x.param === 'all').msg)
+            }
+        })
+    }
+
     return (
         <section className="flex-grow">
             <h1 className="text-purple mb-12">Dashboard</h1>
@@ -103,8 +118,16 @@ const MyCourses = () => {
                         }}
                     />
                 </div>
-                {<Button onClick={handleDelete} variant="outlined" color="error" startIcon={<TiTrash />} disabled={selectedProjects.length === 0}>Delete</Button>}
+                <div className="space-x-2">
+                    {<Button onClick={handleDelete} variant="outlined" color="error" startIcon={<TiTrash />} disabled={selectedProjects.length === 0}>Delete</Button>}
+                    {<Button onClick={handleMakePublic} variant="contained" color="primary" startIcon={<TiWorld />} disabled={selectedProjects.length === 0}>Make public</Button>}
+                </div>
             </Container>
+            <Snackbar
+                open={error !== ""}
+                onClose={() => setError("")}
+                message={error}
+            />
         </section>
     );
 }

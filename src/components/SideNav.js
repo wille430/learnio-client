@@ -13,6 +13,7 @@ const SideNav = () => {
                 <Link to="/"><li>Courses +</li></Link>
                 <Link to="/create-project"><li>Create course</li></Link>
                 <Link to="/techniques"><li>Techniques</li></Link>
+                <Link to="/publicprojects"><li>Public Projects</li></Link>
                 <LogOutButton />
             </ul>
         </aside>

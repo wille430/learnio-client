@@ -24,6 +24,7 @@ const Flashcard = () => {
     }
 
     const getNextFlashcard = () => {
+        setShow(false)
         ProjectAPI.getNext(token, { project_id }).then((nextFlashcard) => {
             setFlashcard(nextFlashcard)
             setLoading(false)
